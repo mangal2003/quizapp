@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App | Unlock Knowledge!</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="fullApp">
+        <!-- userinfo for local storage or database -->
+        <div id="loginUsers">
+            <h3>Tell us </h3>
+            <div id="userNameWrapper">
+                <span id="askName"> your name </span>
+                <input type="text" id="nameHolder" placeholder="Enter your name">
+            </div>
+            <div id="submit">
+                <button type="submit" id="btnSubmit" onclick="saveNameLocal()">Save</button>
+            </div>
+        </div>
+
+        <!-- intro before entering quiz.. -->
+        <div id="introUser">
+            <div id="userAddress">
+                <h3>Hey &nbsp;<span id="userNameDisplay">quiz whiz!</span>&nbsp;<br> Get ready to flex those brain
+                    muscles
+                    and
+                    dive into a world of trivia fun. Let's see what you've
+                    got!"</h3>
+            </div>
+            <div id="btnMain">
+
+                <div id="starter">
+                    <div id="startQuiz" onclick="startQuiz()">
+                        <h3>Start Quiz </h3> <i class="ri-question-answer-fill" id="startQuizIcon"></i>
+                    </div>
+                </div>
+                <div id="rulesWrapper" onclick="showRules()">
+                    <h3><i class="ri-list-ordered-2"></i> Rules </h3><i class="ri-arrow-right-circle-fill"
+                        id="showRules"></i>
+                </div>
+
+            </div>
+            <div id="rules">
+                <i class="ri-close-circle-fill" id="cancleRules" onclick="hideRules()"></i>
+                RULES <br> <br>
+                <ul>
+                    <li>Each correct answer increases your score by 5 points.</li>
+                    <li>You have 3 chances to continue after a wrong answer.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- the quiz arena -->
+        <div id="quizArena">
+            <div id="header">
+                <h3>Welcome</h3>
+                <h3>Your HighScore : &nbsp;<span id="highScore">0</span></h3>
+            </div>
+            <div id="queWrapper">
+                <div id="question">
+                    <h4>Question</h4>
+                    <h4 id="questionText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi distinctio
+                        assumenda accusamus iste quae?</h4>
+                </div>
+            </div>
+
+            <div id="wrapOption">
+                <div id="optionWrap">
+                    <h3>options</h3> <br>
+                    <div id="options">
+                        <div id="option1" class="option" onclick="checkAnswer(1)">Option 1</div>
+                        <div id="option2" class="option" onclick="checkAnswer(2)">Option 2</div>
+                        <div id="option3" class="option" onclick="checkAnswer(3)">Option 3</div>
+                        <div id="option4" class="option" onclick="checkAnswer(4)">Option 4</div>
+                    </div>
+                </div>
+            </div>
+            <div id="currentScoreWrapper">
+                <h3>Current Score : &nbsp;<span id="currentScore">0</span>
+            </div>
+        </div>
+
+        <div id="alerts">
+            <div id="nameReq">
+                Name Required..!
+            </div>
+            <div id="gameOver">
+                Game Over..!
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
