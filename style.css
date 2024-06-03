@@ -243,8 +243,10 @@ html {
   border: none;
   cursor: pointer;
 }
+
 #nameReq,
-#gameOver {
+#gameOver,
+#wrongAns {
   position: absolute;
   top: -100%;
   left: 50%;
@@ -257,7 +259,19 @@ html {
   color: red;
   font-weight: bold;
 }
-
+#correctAns {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: #ffcfcf;
+  padding: 1rem 2rem;
+  width: 70vw;
+  max-width: 400px;
+  text-align: center;
+  color: rgb(0, 255, 0);
+  font-weight: bold;
+}
 @keyframes alertThis {
   0% {
     top: -100%;
