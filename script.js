@@ -14,6 +14,8 @@ let option3 = document.getElementById("option3");
 let option4 = document.getElementById("option4");
 let nameReq = document.getElementById("nameReq");
 let gameOver = document.getElementById("gameOver");
+let correctAns = document.getElementById("correctAns");
+let wrongAns = document.getElementById("wrongAns");
 let ansArr = [];
 let correctAnswer = "";
 let lives = 3;
@@ -99,9 +101,11 @@ function checkAnswer(optionNum) {
     location.reload();
   }
   if (correctAnswer === ansArr[optionNum - 1]) {
+    correctAns.style.animation = "alertThis 4s linear 1";
     score += 5;
     startQuiz();
   } else {
+    wrongAns.style.animation = "alertThis 4s linear 1";
     lives--;
     startQuiz();
   }
