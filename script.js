@@ -98,18 +98,25 @@ function checkAnswer(optionNum) {
   if (correctAnswer === ansArr[optionNum - 1]) {
     correctAns.style.display = "flex";
     score += 5;
-    startQuiz();
-  } else {
-    wrongAns.style.display = "flex";
-    lives--;
-    startQuiz();
-  }}
-  currentScore.innerText = score;
+    currentScore.innerText = score;
   if (score > hiScore) {
     // hiScore = score;
     localStorage.setItem("hiScore",score);
     highScore.innerHTML = localStorage.getItem("hiScore");
   }
+    startQuiz();
+  } else {
+    wrongAns.style.display = "flex";
+    lives--;
+    currentScore.innerText = score;
+  if (score > hiScore) {
+    // hiScore = score;
+    localStorage.setItem("hiScore",score);
+    highScore.innerHTML = localStorage.getItem("hiScore");
+  }
+    startQuiz();
+  }}
+  
 }
   highScore.innerHTML = localStorage.getItem("hiScore");
 
