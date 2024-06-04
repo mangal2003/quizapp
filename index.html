@@ -88,16 +88,33 @@
 
         <div id="alerts">
             <div id="nameReq">
-                Name Required..!
+                <i class="ri-close-circle-fill cancleAlert" onclick="cancleAlert(1)"></i>
+                <h3><i class="ri-question-fill"></i> Name Required..!</h3>
+                <div id="reqName">
+                    <span>&nbsp;<i class="ri-chat-poll-fill"></i>&nbsp;</span>
+                </div>
             </div>
-            <div id="gameOver">
-                Game Over..!
-            </div>
+
             <div id="correctAns">
-                Correct Answer..!
+                <i class="ri-close-circle-fill cancleAlert" onclick="cancleAlert(3)"></i>
+                <h3><i class="ri-checkbox-circle-fill"></i> Correct Answer..!</h3>
+                <div id="plusFive">
+                    <span><i class="ri-add-fill"></i><i class="ri-number-5"></i></span>
+                </div>
             </div>
             <div id="wrongAns">
-                Wrong Answer..!
+                <i class="ri-close-circle-fill cancleAlert" onclick="cancleAlert(4)"></i>
+                <h3><i class="ri-close-circle-fill"></i> Wrong Answer..!</h3>
+                <div id="plusZero">
+                    <span>&nbsp;<i class="ri-calendar-close-fill"></i>&nbsp;</span>
+                </div>
+            </div>
+            <div id="gameOver">
+                <i class="ri-close-circle-fill cancleAlert" onclick="cancleAlert(2)"></i>
+                <h3> <i class="ri-file-damage-fill"></i> Game Over..!</h3>
+                <div id="binOver">
+                    <span>&nbsp;<i class="ri-file-damage-fill"></i>&nbsp;</span>
+                </div>
             </div>
         </div>
     </div>
