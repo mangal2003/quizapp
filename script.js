@@ -25,6 +25,7 @@ if (localStorage.getItem("hiScore") != "") {
   hiScore = parseInt(localStorage.getItem("hiScore"));
 } else {
   hiScore = 0;
+  localStorage.setItem("hiScore",hiScore);
   highScore.innerHTML = hiScore;
 }
 // get name from local storage
