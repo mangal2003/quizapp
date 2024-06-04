@@ -53,7 +53,7 @@ const url = `https://opentdb.com/api.php?amount=1&type=multiple`;
 function startQuiz() {
   if (lives < 1) {
     gameOver.style.display = "flex";
-  }
+  }else{
   fetch(url)
     .then((response) => {
       if (!response.ok) {
@@ -88,12 +88,12 @@ function startQuiz() {
     })
     .catch((error) => {
       questionText.innerHTML = error;
-    });
+    });}
 }
 function checkAnswer(optionNum) {
   if (lives < 1) {
     gameOver.style.display = "flex";
-  }
+  }else{
   if (correctAnswer === ansArr[optionNum - 1]) {
     correctAns.style.display = "flex";
     score += 5;
@@ -102,10 +102,11 @@ function checkAnswer(optionNum) {
     wrongAns.style.display = "flex";
     lives--;
     startQuiz();
-  }
+  }}
   currentScore.innerText = score;
   if (score > hiScore) {
     hiScore = score;
+    hiScore = localStorage.setItem("hiScore",hiScore);
   }
   highScore.innerHTML = localStorage.getItem("hiScore");
 }
