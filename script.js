@@ -36,7 +36,8 @@ function saveNameLocal() {
     loginUsers.style.display = "none";
     introUser.style.display = "flex";
   } else {
-    nameReq.style.animation = "alertThis 3s linear 1";
+    // nameReq.style.animation = "alertThis 3s linear 1";
+    nameReq.style.display = "flex";
   }
 }
 
@@ -51,10 +52,10 @@ const url = `https://opentdb.com/api.php?amount=1&type=multiple`;
 
 function startQuiz() {
   if (lives < 1) {
-    gameOver.style.animation = "alertThis 3s linear 1";
+    // gameOver.style.animation = "alertThis 3s linear 1";
     setTimeout(() => {
       location.reload();
-    }, 2000);
+    }, 1100);
   }
   fetch(url)
     .then((response) => {
@@ -64,9 +65,9 @@ function startQuiz() {
       return response.json();
     })
     .then((data) => {
-      // console.log(data.results[0]);
+      console.log(data);
       //   console.log(data.results[0].category);
-      //   console.log(data.results[0].question);
+      // console.log(data.results[0].question);
       let ques = data.results[0].question;
       questionText.innerHTML = ques;
       introUser.style.display = "none";
@@ -101,11 +102,11 @@ function checkAnswer(optionNum) {
     location.reload();
   }
   if (correctAnswer === ansArr[optionNum - 1]) {
-    correctAns.style.animation = "alertThis 4s linear 1";
+    correctAns.style.display = "flex";
     score += 5;
     startQuiz();
   } else {
-    wrongAns.style.animation = "alertThis 4s linear 1";
+    wrongAns.style.display = "flex";
     lives--;
     startQuiz();
   }
@@ -123,4 +124,19 @@ if (lives < 1) {
   setTimeout(() => {
     location.reload();
   }, 2000);
+}
+function cancleAlert(number) {
+  switch (number) {
+    case 1:
+      nameReq.style.display = "none";
+      break;
+    case 2:
+      gameOver.style.display = "none";
+      break;
+    case 3:
+      correctAns.style.display = "none";
+      break;
+    case 4:
+      wrongAns.style.display = "none";
+  }
 }
