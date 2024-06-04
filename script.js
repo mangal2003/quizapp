@@ -20,16 +20,20 @@ let ansArr = [];
 let correctAnswer = "";
 let lives = 3;
 let score = 0;
-let hiScore = 0; 
-if (localStorage.getItem("hiScore") != "") {
+let hiScore = 0;
+
+// Initialize hiScore from localStorage
+if (localStorage.getItem("hiScore") !== null) {
   hiScore = parseInt(localStorage.getItem("hiScore"));
 } else {
-  hiScore = 0;
-  localStorage.setItem("hiScore",hiScore);
-  highScore.innerHTML = hiScore;
+  localStorage.setItem("hiScore", hiScore);
 }
-// get name from local storage
-if (localStorage.getItem("name") != null) {
+
+// Display initial high score
+highScore.innerHTML = hiScore;
+
+// Get name from local storage
+if (localStorage.getItem("name") !== null) {
   loginUsers.style.display = "none";
   introUser.style.display = "flex";
   userNameDisplay.innerText = localStorage.getItem("name") + " !";
@@ -37,8 +41,9 @@ if (localStorage.getItem("name") != null) {
   loginUsers.style.display = "flex";
   introUser.style.display = "none";
 }
+
 function saveNameLocal() {
-  if (nameHolder.value != "") {
+  if (nameHolder.value !== "") {
     localStorage.setItem("name", nameHolder.value);
     loginUsers.style.display = "none";
     introUser.style.display = "flex";
@@ -50,6 +55,7 @@ function saveNameLocal() {
 function showRules() {
   rules.style.display = "block";
 }
+
 function hideRules() {
   rules.style.display = "none";
 }
@@ -57,76 +63,72 @@ function hideRules() {
 const url = `https://opentdb.com/api.php?amount=1&type=multiple`;
 
 function startQuiz() {
-  // highScore.innerHTML = hiScore;
   if (lives < 1) {
     gameOver.style.display = "flex";
-  }else{
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      let ques = data.results[0].question;
-      questionText.innerHTML = ques;
-      introUser.style.display = "none";
-      quizArena.style.display = "block";
-      function rotateRight(arr, k) {
-        k = k % arr.length;
-        return arr.slice(-k).concat(arr.slice(0, -k));
-      }
+  } else {
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        let ques = data.results[0].question;
+        questionText.innerHTML = ques;
+        introUser.style.display = "none";
+        quizArena.style.display = "block";
+        
+        function rotateRight(arr, k) {
+          k = k % arr.length;
+          return arr.slice(-k).concat(arr.slice(0, -k));
+        }
 
-      const optionArr = [
-        data.results[0].correct_answer,
-        data.results[0].incorrect_answers[0],
-        data.results[0].incorrect_answers[1],
-        data.results[0].incorrect_answers[2],
-      ];
-      correctAnswer = data.results[0].correct_answer;
-      const k = Math.floor(Math.random() * 10);
-      const rotatedArr = rotateRight(optionArr, k);
-      ansArr = [...rotatedArr];
-      option1.innerHTML = rotatedArr[0];
-      option2.innerHTML = rotatedArr[1];
-      option3.innerHTML = rotatedArr[2];
-      option4.innerHTML = rotatedArr[3];
-    })
-    .catch((error) => {
-      questionText.innerHTML = error;
-    });}
+        const optionArr = [
+          data.results[0].correct_answer,
+          data.results[0].incorrect_answers[0],
+          data.results[0].incorrect_answers[1],
+          data.results[0].incorrect_answers[2],
+        ];
+        correctAnswer = data.results[0].correct_answer;
+        const k = Math.floor(Math.random() * 10);
+        const rotatedArr = rotateRight(optionArr, k);
+        ansArr = [...rotatedArr];
+        option1.innerHTML = rotatedArr[0];
+        option2.innerHTML = rotatedArr[1];
+        option3.innerHTML = rotatedArr[2];
+        option4.innerHTML = rotatedArr[3];
+      })
+      .catch((error) => {
+        questionText.innerHTML = error;
+      });
+  }
 }
+
 function checkAnswer(optionNum) {
   if (lives < 1) {
     gameOver.style.display = "flex";
-  }else{
-  if (correctAnswer === ansArr[optionNum - 1]) {
-    correctAns.style.display = "flex";
-    score += 5;
-    currentScore.innerText = score;
-  // if (score > hiScore) {
-  //   hiScore = score;
-  //   highScore.innerHTML = hiScore;
-  // }
-    startQuiz();
   } else {
-    wrongAns.style.display = "flex";
-    lives--;
-    currentScore.innerText = score;
-  // if (score > hiScore) {
-  //   hiScore = score;
-  //   localStorage.setItem("hiScore",score);
-  //   highScore.innerHTML = hiScore;
-  // }
-    startQuiz();
-  }}
-}
-function cancleAlert(number) {
-  if (score > hiScore) {
-    localStorage.setItem("hiScore", hiScore);
-    highScore.innerHTML = parseInt(localStorage.getItem("hiScore"));
+    if (correctAnswer === ansArr[optionNum - 1]) {
+      correctAns.style.display = "flex";
+      score += 5;
+      currentScore.innerText = score;
+      if (score > hiScore) {
+        hiScore = score;
+        localStorage.setItem("hiScore", hiScore);
+        highScore.innerHTML = hiScore;
+      }
+      startQuiz();
+    } else {
+      wrongAns.style.display = "flex";
+      lives--;
+      currentScore.innerText = score;
+      startQuiz();
+    }
   }
+}
+
+function cancleAlert(number) {
   switch (number) {
     case 1:
       nameReq.style.display = "none";
@@ -142,3 +144,7 @@ function cancleAlert(number) {
       wrongAns.style.display = "none";
   }
 }
+
+// Display initial high score when the script loads
+highScore.innerHTML = hiScore;
+
