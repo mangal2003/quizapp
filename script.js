@@ -65,7 +65,7 @@ function startQuiz() {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       //   console.log(data.results[0].category);
       // console.log(data.results[0].question);
       let ques = data.results[0].question;
