@@ -107,7 +107,7 @@ function checkAnswer(optionNum) {
   currentScore.innerText = score;
   if (score > hiScore) {
     // hiScore = score;
-    hiScore = localStorage.setItem("hiScore",score);
+    localStorage.setItem("hiScore",score);
     highScore.innerHTML = localStorage.getItem("hiScore");
   }
 }
