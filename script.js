@@ -21,10 +21,7 @@ let correctAnswer = "";
 let lives = 3;
 let score = 0;
 let hiScore = 0; 
-function getHiScoreFromLocalStorage() {
-  return localStorage.getItem("hiScore") ? parseInt(localStorage.getItem("hiScore")) : 0;
-}
-hiScore = getHiScoreFromLocalStorage();
+hiScore = parseInt(localStorage.getItem("hiScore"));
 
 // get name from local storage
 if (localStorage.getItem("name") != null) {
