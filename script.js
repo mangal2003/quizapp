@@ -20,7 +20,7 @@ let ansArr = [];
 let correctAnswer = "";
 let lives = 3;
 let score = 0;
-let hiScore = 0;
+let hiScore = localStorage.getItem("hiScore");
 // get name from local storage
 if (localStorage.getItem("name") != null) {
   loginUsers.style.display = "none";
@@ -52,10 +52,7 @@ const url = `https://opentdb.com/api.php?amount=1&type=multiple`;
 
 function startQuiz() {
   if (lives < 1) {
-    // gameOver.style.animation = "alertThis 3s linear 1";
-    setTimeout(() => {
-      location.reload();
-    }, 1100);
+    gameOver.style.display = "flex";
   }
   fetch(url)
     .then((response) => {
@@ -65,9 +62,6 @@ function startQuiz() {
       return response.json();
     })
     .then((data) => {
-      // console.log(data);
-      //   console.log(data.results[0].category);
-      // console.log(data.results[0].question);
       let ques = data.results[0].question;
       questionText.innerHTML = ques;
       introUser.style.display = "none";
@@ -98,8 +92,7 @@ function startQuiz() {
 }
 function checkAnswer(optionNum) {
   if (lives < 1) {
-    alert("Game Over");
-    location.reload();
+    gameOver.style.display = "flex";
   }
   if (correctAnswer === ansArr[optionNum - 1]) {
     correctAns.style.display = "flex";
@@ -113,18 +106,12 @@ function checkAnswer(optionNum) {
   currentScore.innerText = score;
   if (score > hiScore) {
     hiScore = score;
-    localStorage.setItem("hiScore", hiScore);
   }
   highScore.innerHTML = localStorage.getItem("hiScore");
 }
 
 highScore.innerHTML = localStorage.getItem("hiScore");
-if (lives < 1) {
-  gameOver.style.animation = "alertThis 4s linear 1";
-  setTimeout(() => {
-    location.reload();
-  }, 2000);
-}
+
 function cancleAlert(number) {
   switch (number) {
     case 1:
@@ -132,6 +119,8 @@ function cancleAlert(number) {
       break;
     case 2:
       gameOver.style.display = "none";
+      localStorage.setItem("hiScore", hiScore);
+      location.reload();
       break;
     case 3:
       correctAns.style.display = "none";
