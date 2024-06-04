@@ -21,8 +21,12 @@ let correctAnswer = "";
 let lives = 3;
 let score = 0;
 let hiScore = 0; 
-hiScore = parseInt(localStorage.getItem("hiScore"));
-
+if (localStorage.getItem("hiScore") != null) {
+  hiScore = parseInt(localStorage.getItem("hiScore"));
+} else {
+  hiScore = 0;
+  highScore.innerHTML = hiScore;
+}
 // get name from local storage
 if (localStorage.getItem("name") != null) {
   loginUsers.style.display = "none";
@@ -38,7 +42,6 @@ function saveNameLocal() {
     loginUsers.style.display = "none";
     introUser.style.display = "flex";
   } else {
-    // nameReq.style.animation = "alertThis 3s linear 1";
     nameReq.style.display = "flex";
   }
 }
@@ -102,8 +105,7 @@ function checkAnswer(optionNum) {
     score += 5;
     currentScore.innerText = score;
   if (score > hiScore) {
-    // hiScore = score;
-    localStorage.setItem("hiScore",score);
+    hiScore = score;
     highScore.innerHTML = hiScore;
   }
     startQuiz();
@@ -112,17 +114,13 @@ function checkAnswer(optionNum) {
     lives--;
     currentScore.innerText = score;
   if (score > hiScore) {
-    // hiScore = score;
-    localStorage.setItem("hiScore",score);
+    hiScore = score;
+    // localStorage.setItem("hiScore",score);
     highScore.innerHTML = hiScore;
   }
     startQuiz();
   }}
-  
 }
-  highScore.innerHTML = hiScore;
-
-
 function cancleAlert(number) {
   switch (number) {
     case 1:
@@ -130,7 +128,7 @@ function cancleAlert(number) {
       break;
     case 2:
       gameOver.style.display = "none";
-      localStorage.setItem("hiScore", hiScore);
+      localStorage.setItem("hiScore", max(hiScore,score));
       location.reload();
       break;
     case 3:
