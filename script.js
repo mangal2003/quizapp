@@ -20,7 +20,7 @@ let ansArr = [];
 let correctAnswer = "";
 let lives = 3;
 let score = 0;
-let hiScore = 0;
+let hiScore = localStorage.getItem("hiScore");
 // get name from local storage
 if (localStorage.getItem("name") != null) {
   loginUsers.style.display = "none";
