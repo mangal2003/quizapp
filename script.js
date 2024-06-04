@@ -21,7 +21,7 @@ let correctAnswer = "";
 let lives = 3;
 let score = 0;
 let hiScore = 0; 
-if (localStorage.getItem("hiScore") != null) {
+if (localStorage.getItem("hiScore") != "") {
   hiScore = parseInt(localStorage.getItem("hiScore"));
 } else {
   hiScore = 0;
@@ -56,7 +56,7 @@ function hideRules() {
 const url = `https://opentdb.com/api.php?amount=1&type=multiple`;
 
 function startQuiz() {
-  highScore.innerHTML = hiScore;
+  // highScore.innerHTML = hiScore;
   if (lives < 1) {
     gameOver.style.display = "flex";
   }else{
@@ -104,31 +104,34 @@ function checkAnswer(optionNum) {
     correctAns.style.display = "flex";
     score += 5;
     currentScore.innerText = score;
-  if (score > hiScore) {
-    hiScore = score;
-    highScore.innerHTML = hiScore;
-  }
+  // if (score > hiScore) {
+  //   hiScore = score;
+  //   highScore.innerHTML = hiScore;
+  // }
     startQuiz();
   } else {
     wrongAns.style.display = "flex";
     lives--;
     currentScore.innerText = score;
-  if (score > hiScore) {
-    hiScore = score;
-    // localStorage.setItem("hiScore",score);
-    highScore.innerHTML = hiScore;
-  }
+  // if (score > hiScore) {
+  //   hiScore = score;
+  //   localStorage.setItem("hiScore",score);
+  //   highScore.innerHTML = hiScore;
+  // }
     startQuiz();
   }}
 }
 function cancleAlert(number) {
+  if (score > hiScore) {
+    localStorage.setItem("hiScore", hiScore);
+    highScore.innerHTML = parseInt(localStorage.getItem("hiScore"));
+  }
   switch (number) {
     case 1:
       nameReq.style.display = "none";
       break;
     case 2:
       gameOver.style.display = "none";
-      localStorage.setItem("hiScore", max(hiScore,score));
       location.reload();
       break;
     case 3:
